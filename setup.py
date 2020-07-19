@@ -28,15 +28,19 @@ with open(pkginfo, "rb") as fobj:
 with open(os.path.join(astroid_dir, "README.rst")) as fobj:
     long_description = fobj.read()
 
-
 needs_pytest = set(["pytest", "test", "ptr"]).intersection(sys.argv)
 pytest_runner = ["pytest-runner"] if needs_pytest else []
+
+
+def flytrex_version(version):
+    delimiter = "." if "+" in version else "+"
+    return f"{version}{delimiter}flytrex-1"
 
 
 def install():
     return setup(
         name="astroid",
-        version=version,
+        version=flytrex_version(version),
         license=license,
         description=description,
         long_description=long_description,
